@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Octopart Autosuggest</title>
+	<link rel="stylesheet" type="text/css" href="css/autosuggest.css" media="screen">
+</head>
+<body>
+	<h1>Octopart Search</h1>
+
+	<div class="parts-search">
+			<input type="text" name="username" placeholder="Search by part number">
+			<button name="Search">search</button>
+
+
+		<h4>Results</h4>
+		<table id=results class="results">
+		</table>
+	</div>
+
+	<div class="test">
+		<script type="text/javascript" src="autosuggest.js"></script>
+	</div>
+
+</body>
+<!-- results template -->
+<script type="template" id="results-template">
+<tbody class="results-part">
+	<tr>
+		<td>
+			<ul>
+				<li class="results-part-brandname">{ {brandName} }</li>
+				<li class="results-part-mpn">{ {partMpn} }</li>
+				<li class="results-part-snippet">{ {partSnippet} }</li>
+			</ul>
+		</td>
+	</tr>
+</tbody>
+</script>
+</html>
