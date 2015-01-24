@@ -13,7 +13,7 @@
 
 
 		<h4>Results</h4>
-		<table id=results class="results">
+		<table id=results class="results" border="1" cellpadding="5" cellspacing="5">
 		</table>
 	</div>
 
@@ -24,16 +24,31 @@
 </body>
 <!-- results template -->
 <script type="template" id="results-template">
-<tbody class="results-part">
-	<tr>
-		<td>
-			<ul>
-				<li class="results-part-brandname">{ {brandName} }</li>
-				<li class="results-part-mpn">{ {partMpn} }</li>
-				<li class="results-part-snippet">{ {partSnippet} }</li>
-			</ul>
-		</td>
-	</tr>
-</tbody>
+	<tbody class="results-part-header">
+		<tr>
+			<td colspan="4">
+				<ul>
+					<li class="results-part-header-brandname">{ {brandName} }</li>
+					<li class="results-part-header-mpn">{ {partMpn} }</li>
+					<li class="results-part-header-snippet">{ {partSnippet} }</li>
+				</ul>
+			</td>
+		</tr>
+	</tbody>
+	<tbody class="results-part-info" id="results-part-info-{ {tblnum} }">
+		<tr>
+			<th>Distributor</th>
+			<th>SKU</th>
+			<th>stock</th>
+			<th></th>
+		</tr>
+	</tbody>
+</script>
+
+<script type="template" id="results-part-info-template">
+ 		<td>{ {distributor} }</td>  
+ 		<td>{ {sku} }</td>  
+ 		<td>{ {stock} }</td>  
+ 		<td><a href={ {url} }> Buy Now </td>  
 </script>
 </html>
