@@ -8,11 +8,36 @@ document.addEventListener('DOMContentLoaded', function () {
   url += "?callback=AutoSuggest.parseResponse";
 
 
-  var searchInput = document.querySelector(".parts-search > input");
-  var searchButton = document.querySelector(".parts-search > button");
+  var searchInput = document.querySelector(".parts-search-suggestions-input > input");
+  var searchForm = document.querySelector(".parts-search-form");
+
+  //autosuggest
+  searchInput.addEventListener("keyup", function (event){
+    var dataSrc = document.createElement('script');
+    var searchQuery = event.target.value;
+    var searchUrl = url + "&apikey=" + OCTOPART_API_KEY + "&q=" + searchQuery;
+    dataSrc.src = searchUrl;
+    AutoSuggest.parseResponse = function (search_response) {
+      var searchSuggestionsEl = document.querySelector(".parts-search-suggestions > ul");
+      
+      searchSuggestionsEl.innerHTML = "";
+      for (var i = 0; i < 5; i++) {
+        if (searchQuery.length < 2) {break};
+        var searchResultEl = document.createElement("li");
+        var item = search_response.results[i].item;
+        searchResultEl.innerHTML = item.mpn;
+        searchSuggestionsEl.appendChild(searchResultEl);
+      };
+    };
+
+    document.querySelector(".test").appendChild(dataSrc);
+
+  });
+
 
   //submit search
-  searchButton.addEventListener("click", function () {
+  searchForm.addEventListener("submit", function (event) {
+    event.preventDefault();
     var resultsTable = document.getElementById("results");
     var dataSrc = document.createElement('script');
     var searchQuery = searchInput.value;
@@ -37,8 +62,7 @@ document.addEventListener('DOMContentLoaded', function () {
         resultsTemplate = resultsTemplate.replace("{ {partSnippet} }", partSnippet);
         resultsTable.innerHTML += resultsTemplate;
 
-        for (var j = 0; j < offers.length; j++) {
-          if (j > 3) {break};
+        for (var j = 0; j < 4; j++) {
           var offer = offers[j];
           var distributor = offer.seller.name;
           var sku = offer.sku;
