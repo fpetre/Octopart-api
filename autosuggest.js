@@ -15,22 +15,28 @@ document.addEventListener('DOMContentLoaded', function () {
   searchInput.addEventListener("keyup", function (event){
     var dataSrc = document.createElement('script');
     var searchQuery = event.target.value;
-    var searchUrl = url + "&apikey=" + OCTOPART_API_KEY + "&q=" + searchQuery;
+    var searchUrl = url + "&apikey=" + OCTOPART_API_KEY + "&q=" + searchQuery + "*";
     dataSrc.src = searchUrl;
     AutoSuggest.parseResponse = function (search_response) {
       var searchSuggestionsEl = document.querySelector(".parts-search-suggestions > ul");
-      
+      var numOfResults = Math.min(5, search_response.results.length);
       searchSuggestionsEl.innerHTML = "";
-      for (var i = 0; i < 5; i++) {
-        if (searchQuery.length < 2) {break};
+      for (var i = 0; i < numOfResults; i++) {
+        if (searchQuery.length < 2 || search_response.results.length === 0) {break};
         var searchResultEl = document.createElement("li");
         var item = search_response.results[i].item;
         searchResultEl.innerHTML = item.mpn;
         searchSuggestionsEl.appendChild(searchResultEl);
       };
+      if (searchSuggestionsEl.childNodes.length > 0){
+        searchSuggestionsEl.className += " active";
+      } else if (searchSuggestionsEl.childNodes.length == 0) {
+        searchSuggestionsEl.className = "";
+      }
     };
 
     document.querySelector(".test").appendChild(dataSrc);
+    // addBorders(); // adds correct borders
 
   });
 
@@ -77,8 +83,11 @@ document.addEventListener('DOMContentLoaded', function () {
           resultsPartInfoTemplate = resultsPartInfoTemplate.replace("{ {stock} }", stock);
           resultsPartInfoTemplate = resultsPartInfoTemplate.replace("{ {url} }", productUrl);
           resultsPartInfoTr.innerHTML = resultsPartInfoTemplate;
-
           resultsPartInfoEl.appendChild(resultsPartInfoTr);
+
+          resultsTable.setAttribute("border", "1");
+          resultsTable.setAttribute("cellpadding", "5");
+          resultsTable.setAttribute("cellspacing", "5");
 
         };
       });
@@ -88,5 +97,21 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
   });
+
+
+//css scripts
+
+// function addBorders(){
+//   var suggestions = document.querySelector(".parts-search-suggestions > ul");
+//   console.log(suggestions.childNodes.length);
+//   if (suggestions.childNodes.length > 0) {
+//     suggestions.className = "active";
+//   } else {
+//     suggestions.className = "";
+//   } 
+// };
+
+
+
 
 });

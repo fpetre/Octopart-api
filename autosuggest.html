@@ -5,10 +5,10 @@
 	<link rel="stylesheet" type="text/css" href="css/autosuggest.css" media="screen">
 </head>
 <body>
-	<h1>Octopart Search</h1>
+	<h1 class="search-header">Octopart Search</h1>
 
 	<div class="parts-search">
-		<form class="parts-search-form">
+		<form class="parts-search-form group" autocomplete="off">
 			<div class="parts-search-suggestions-input">
 				<input type="text" name="username" placeholder="Search by part number">
 				<div class="parts-search-suggestions">
@@ -16,12 +16,12 @@
 					</ul>
 				</div>
 			</div>
-			<button name="Search">search</button>
+			<button class="search-button" name="Search">search</button>
 		</form>
 
 
-		<h4>Results</h4>
-		<table id=results class="results" border="1" cellpadding="5" cellspacing="5">
+		<h1 class="results-header">Results</h1>
+		<table id=results class="results">
 		</table>
 	</div>
 
