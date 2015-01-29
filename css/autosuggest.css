@@ -56,11 +56,22 @@ body {
 
 .parts-search-suggestions > ul.active {
 	border-top: 1px solid blue;
-	padding: 10px 10px 0 10px;
+	padding-top: 10px;
+
 }
 
 .parts-search-suggestions > ul.active > li {
 	padding-bottom: 10px;
+}
+.parts-search-suggestion {
+	padding-left: 10px;
+	vertical-align: baseline; 
+}
+
+.parts-search-suggestion:hover {
+	background: #aaa;
+	opacity: .4;
+	cursor: pointer;
 }
 
 
@@ -85,4 +96,10 @@ body {
 	margin-left: 20px;
 }
 
+
+
 /*results*/
+
+tbody.results-part-info {
+	margin-bottom: 10px;
+}
